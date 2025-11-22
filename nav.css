@@ -1,0 +1,215 @@
+* {
+    box-sizing: border-box;
+  }
+  a {
+    color: #ffffff;
+  }
+  .menu {
+      width: 100%;
+      margin: 0 auto !important;
+      text-align: center;
+  }
+  .menu-container {
+    margin: 0 auto;
+    background-image: url(./assests/bg_navbar_t3.png) ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .menu-mobile {
+    display: none;
+    padding: 20px;
+  }
+  .menu-mobile:after {
+    content: "\f394";
+    font-family: "Ionicons";
+    font-size: 2.5rem;
+    padding: 0;
+    float: right;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-25%);
+    transform: translateY(-25%);
+  }
+  
+  .menu > ul {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+    clear: right;
+  }
+  
+  .menu > ul:before,
+  .menu > ul:after {
+    content: "";
+    display: table;
+  }
+  .menu > ul:after {
+    clear: both;
+  }
+  
+  .menu > ul > li {
+    display: inline-block;
+    padding: 0;
+  }
+  .menu > ul > li a {
+    text-decoration: none;
+    padding: 0.6em 2em;
+    display: block;
+  }
+  .menu > ul > li:hover {
+    background: #f0f0f0;
+  }
+  
+  .menu > ul > li a:hover {
+    color: black !important;
+  }
+  
+  .menu > ul > li > ul {
+    display: none;
+    width: 100%;
+    background: #f0f0f0;
+    padding: 20px;
+    position: absolute;
+    z-index: 99;
+    left: 0%;
+    text-align: center;
+    list-style: none;
+    box-sizing: border-box;
+  }
+  
+  .menu > ul > li > ul:before,
+  .menu > ul > li > ul:after {
+    content: "";
+    display: table;
+  }
+  .menu > ul > li > ul:after {
+    clear: both;
+  }
+  .menu > ul > li > ul > li {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    padding-bottom: 0;
+    text-align: end;
+    list-style: none;
+    position: relative;
+    background: none;
+  }
+  
+  
+  .menu > ul > li > ul > li a {
+    color: #777;
+    padding: 0.1em 1.4em;
+    width: 100%;
+    display: block;
+  }
+  .menu > ul > li > ul > li a:hover{
+      color:#03a9f4;
+  }
+  .menu > ul > li > ul > li > ul {
+    display: block;
+    padding: 0;
+    margin: 10px 0 0;
+    list-style: none;
+    box-sizing: border-box;
+  }
+  .menu > ul > li > ul > li > ul:before,
+  .menu > ul > li > ul > li > ul:after {
+    content: "";
+    display: table;
+  }
+  .menu > ul > li > ul > li > ul:after {
+    clear: both;
+  }
+  .menu > ul > li > ul > li > ul > li {
+    /* display: inline-block; */
+    width: 100%;
+    padding: 10px 0;
+    margin: 0;
+    font-size: .8em;
+  }
+  .menu > ul > li > ul > li > ul > li a {
+    border: 0;    
+    font-size: 14px;
+  }
+  .menu > ul > li > ul.normal-sub {
+    width: 300px;
+    left: auto;
+    padding: 10px 20px;
+  }
+  .menu > ul > li > ul.normal-sub > li {
+    width: 100%;
+  }
+  .menu > ul > li > ul.normal-sub > li a {
+    border: 0;
+    padding: 1em 0;
+  }
+  /* ––––––––––––––––––––––––––––––––––––––––––––––––––
+  Mobile style's
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  @media only screen and (max-width: 959px) {
+    .menu-container {
+      width: 100%;
+    }
+    .menu-container .menu{
+      display:inline-block;
+     }
+    .menu-mobile {
+      display: block;    
+      float: right;    
+      padding: 20px 20px 0;
+    }
+
+    .vertical-line-cus-sty{
+      display: none !important;
+    }
+  
+    .menu > ul > li > ul > li {
+      left: 0px !important;
+    }
+    
+    .menu-dropdown-icon:before {
+      display: block;
+    }
+    .menu > ul {
+      display: none;
+      width:100%;
+    }
+    .menu > ul > li {
+      width: 100%;
+      float: none;
+      display: block;
+    }
+    .menu > ul > li a {
+      padding: 1.5em;
+      width: 100%;
+      display: block;
+    }
+    .menu > ul > li > ul {
+      position: relative;    
+      padding: 0 40px;
+    }
+    .menu > ul > li > ul.normal-sub {
+      width: 100%;
+    }
+    .menu > ul > li > ul > li {
+      float: none;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .menu > ul > li > ul > li:first-child {
+      margin: 0;
+    }
+    .menu > ul > li > ul > li > ul {
+      position: relative;
+    }
+    .menu > ul > li > ul > li > ul > li {
+      float: none;
+    }
+    .menu .show-on-mobile {
+      display: block;
+    }
+  }

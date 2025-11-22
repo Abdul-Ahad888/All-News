@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <style>
+        .nav {
+            height: 50px !important;
+            width: 100% !important;
+            background-color: transparent;
+            display: flex !important;
+            justify-content: center !important;
+            z-index: 10 !important;
+            flex-wrap: nowrap !important;
+
+        }
+
+        .top-line {
+            position: absolute;
+            left: -50px;
+            width: 30%;
+        }
+
+        /*Styling Links*/
+        .nav-links {
+            display: flex;
+            list-style: none;
+            width: 88vw;
+            padding: 0 0.7vw;
+            /* justify-content: space-around; */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            color: black;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 500;
+            font-size: 20px;
+            margin: 0 0.7vw;
+        }
+
+        /*Styling Hamburger Icon*/
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: black;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+
+
+        /*Stying for small screens*/
+        @media screen and (max-width: 800px) {
+            nav {
+                position: fixed;
+                background-color: white !important;
+                z-index: 3;
+                justify-content: left !important;
+                box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+                padding-top: 10px;
+            }
+
+            .hamburger {
+                display: block;
+                position: absolute;
+                cursor: pointer;
+                right: 3%;
+                top: 50%;
+                transform: translate(-5%, -50%);
+                z-index: 2;
+                transition: all 0.7s ease;
+            }
+
+            .nav-links {
+                position: fixed;
+                background: white;
+                height: 100vh;
+                width: 100%;
+                flex-direction: column;
+                clip-path: circle(50px at 90% -20%);
+                -webkit-clip-path: circle(50px at 90% -10%);
+                transition: all 1s ease-out;
+                pointer-events: none;
+                margin-top: 0px;
+
+
+
+                align-items: normal;
+                justify-content: normal;
+                padding-top: 55px;
+                padding-left: 25px;
+
+            }
+
+            .nav-links.open {
+                clip-path: circle(1000px at 90% -10%);
+                -webkit-clip-path: circle(1000px at 90% -10%);
+                pointer-events: all;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                padding-bottom: 30px;
+            }
+
+            .nav-links li:nth-child(1) {
+                transition: all 0.5s ease 0.2s;
+            }
+
+            .nav-links li:nth-child(2) {
+                transition: all 0.5s ease 0.4s;
+            }
+
+            .nav-links li:nth-child(3) {
+                transition: all 0.5s ease 0.6s;
+            }
+
+            .nav-links li:nth-child(4) {
+                transition: all 0.5s ease 0.7s;
+            }
+
+            .nav-links li:nth-child(5) {
+                transition: all 0.5s ease 0.8s;
+            }
+
+            .nav-links li:nth-child(6) {
+                transition: all 0.5s ease 0.9s;
+                margin: 0;
+            }
+
+            .nav-links li:nth-child(7) {
+                transition: all 0.5s ease 1s;
+                margin: 0;
+            }
+
+            li.fade {
+                opacity: 1;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+
+            .navbar-mobileView-icon {
+                display: inline-block !important;
+                vertical-align: middle;
+                padding-left: 15px;
+            }
+
+
+        }
+
+        /*Animating Hamburger Icon on Click*/
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .toggle .line2 {
+            transition: all 0.7s ease;
+            width: 0;
+        }
+
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .sub-menu {
+            box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+            width: 100%;
+            height: auto;
+            position: absolute;
+            left: 0;
+            background: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 2;
+            padding: 0px;
+            margin: 0px;
+        }
+
+
+        nav .nav-links li:hover .vehicle-sub-menu {
+            display: block;
+            /* border: 3px solid palevioletred!important; */
+        }
+
+
+        nav .nav-links li:hover .energy-sub-menu {
+            display: block;
+        }
+
+        nav .nav-links li:hover .charging-sub-menu {
+            display: block;
+        }
+
+
+        nav .nav-links li:hover .discover-sub-menu {
+            display: block;
+        }
+
+        nav .nav-links li:hover .shop-sub-menu {
+            display: block;
+        }
+
+
+        /* extra mobile nav links */
+        .support-mobile-view-link {
+            display: none;
+        }
+
+        .account-mobile-view-link {
+            display: none;
+        }
+
+        /* ================================vehicles navbar================================ */
+
+        .sub-menu-vehiclesrow-mainrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            /* width: 50%; */
+        }
+
+
+        .sub-menu-vehiclesrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 50%;
+            border-right: 3px solid black;
+            padding-top: 20px;
+        }
+
+        .sub-menu-vehiclescolumn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-vehiclescolumn p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .sub-menu-vehiclesrow2 {
+            display: flex;
+            flex-direction: row;
+            margin-top: -10px;
+        }
+
+        .sub-menu-vehiclesrow2 a {
+            text-decoration: underline !important;
+            font-size: 14px !important;
+        }
+
+        .sub-menu-vehiclescolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-vehiclescolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 2;
+            padding-left: 20px;
+        }
+
+        .vehiclescolumn-links2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px !important;
+            text-decoration: none;
+            color: black !important;
+        }
+
+        .vehiclescolumn-links2:hover {
+            border-bottom: 2px solid black !important;
+            transition: 0.3s;
+        }
+
+
+        /* ================================energy navbar================================ */
+
+
+        .sub-menu-energyrow-mainrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            /* width: 50%; */
+        }
+
+
+        .sub-menu-energyrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 50%;
+            border-right: 3px solid black;
+            padding-top: 20px;
+        }
+
+        .sub-menu-energycolumn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-energycolumn p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .energy-img-nav {
+            width: 60%;
+        }
+
+        .sub-menu-energyrow2 {
+            display: flex;
+            flex-direction: row;
+            margin-top: -10px;
+        }
+
+        .sub-menu-energyrow2 a {
+            text-decoration: underline !important;
+            font-size: 14px !important;
+        }
+
+        .sub-menu-energycolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-energycolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 2;
+            padding-left: 20px;
+        }
+
+        .energycolumn-links2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px !important;
+            text-decoration: none;
+            color: black !important;
+        }
+
+        .energycolumn-links2:hover {
+            border-bottom: 2px solid black !important;
+            transition: 0.3s;
+        }
+
+
+        /* ================================energy mobile navbar================================ */
+
+
+        .energy-mobile-column {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 30px;
+        }
+
+        .energy-mobile-icon {
+            font-size: 20px;
+            position: fixed;
+        }
+
+        .energy-mobile-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 0px;
+            margin-left: -25px;
+            margin-bottom: 0px;
+            padding-bottom: 35px;
+            /* position: fixed; */
+        }
+
+        .energy-mobile-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 30px;
+        }
+
+        .energy-mobile-column2 {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            padding-left: 25px;
+        }
+
+        .energy-mobile-row2 {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        .energy-mobile-column2 p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .energy-mobile-row2 a {
+            text-decoration: underline !important;
+            font-size: 16px !important;
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            padding-right: 15px;
+        }
+
+        .mobile-energy-img-nav {
+            width: 35%;
+        }
+
+        .mobile-energy-border {
+            border-bottom: 2px solid gray;
+            width: 90%;
+            margin-bottom: 30px;
+        }
+
+        .energy-mobile-links {
+            padding-bottom: 25px !important;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================charging navbar================================ */
+
+
+        .sub-menu-chargingrow-mainrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            /* width: 50%; */
+        }
+
+
+        .sub-menu-chargingrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 50%;
+            border-right: 3px solid black;
+            padding-top: 20px;
+        }
+
+        .sub-menu-chargingcolumn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-chargingcolumn p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .charging-img-nav {
+            width: 60%;
+        }
+
+        .sub-menu-chargingrow2 {
+            display: flex;
+            flex-direction: row;
+            margin-top: -10px;
+        }
+
+        .sub-menu-chargingrow2 a {
+            text-decoration: underline !important;
+            font-size: 14px !important;
+        }
+
+        .sub-menu-chargingcolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-chargingcolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 2;
+            padding-left: 20px;
+        }
+
+        .chargingcolumn-links2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px !important;
+            text-decoration: none;
+            color: black !important;
+        }
+
+        .chargingcolumn-links2:hover {
+            border-bottom: 2px solid black !important;
+            transition: 0.3s;
+        }
+
+
+
+        /* ================================charging mobile navbar================================ */
+
+        .charging-mobile-column {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 30px;
+        }
+
+        .charging-mobile-icon {
+            font-size: 20px;
+            position: fixed;
+        }
+
+        .charging-mobile-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 0px;
+            margin-left: -25px;
+            margin-bottom: 0px;
+            padding-bottom: 35px;
+            /* position: fixed; */
+        }
+
+        .charging-mobile-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 30px;
+        }
+
+        .charging-mobile-column2 {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            padding-left: 25px;
+        }
+
+        .charging-mobile-row2 {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        .charging-mobile-column2 p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .charging-mobile-row2 a {
+            text-decoration: underline !important;
+            font-size: 16px !important;
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            padding-right: 15px;
+        }
+
+        .mobile-charging-img-nav {
+            width: 35%;
+        }
+
+        .mobile-charging-border {
+            border-bottom: 2px solid gray;
+            width: 90%;
+            margin-bottom: 30px;
+        }
+
+        .charging-mobile-links {
+            padding-bottom: 25px !important;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================discover navbar================================ */
+
+
+        .sub-menu-discoverrow-mainrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            /* width: 50%; */
+        }
+
+
+        .sub-menu-discoverrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 50%;
+            border-right: 3px solid black;
+            padding-top: 20px;
+        }
+
+        .sub-menu-discovercolumn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-right: 70px;
+        }
+
+        .sub-menu-discovercolumn p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+        }
+
+
+
+        .discovercolumn-links2 {
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 18px !important;
+            text-decoration: none;
+            color: black !important;
+        }
+
+        .discovercolumn-links2:hover {
+            border-bottom: 2px solid black !important;
+            transition: 0.3s;
+        }
+
+
+
+        /* ================================discover mobile navbar================================ */
+
+        .discover-mobile-column {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 30px;
+        }
+
+        .discover-mobile-icon {
+            font-size: 20px;
+            position: fixed;
+        }
+
+        .discover-mobile-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 0px;
+            margin-left: -25px;
+            margin-bottom: 0px;
+            padding-bottom: 35px;
+            /* position: fixed; */
+        }
+
+        .discover-mobile-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 30px;
+        }
+
+        .discover-mobile-column2 {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            padding-left: 25px;
+        }
+
+        .discover-mobile-row2 {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        .discover-mobile-column2 p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .discover-mobile-row2 a {
+            text-decoration: underline !important;
+            font-size: 16px !important;
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            padding-right: 15px;
+        }
+
+        .mobile-discover-img-nav {
+            width: 35%;
+        }
+
+        .mobile-discover-border {
+            border-bottom: 2px solid gray;
+            width: 90%;
+            margin-bottom: 30px;
+        }
+
+        .discover-mobile-links {
+            padding-left: 25px;
+            padding-bottom: 25px !important;
+        }
+
+
+        /* ================================shop navbar================================ */
+
+
+        .sub-menu-shoprow-mainrow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            /* width: 50%; */
+        }
+
+
+        .sub-menu-shoprow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 50%;
+            border-right: 3px solid black;
+            padding-top: 20px;
+        }
+
+        .sub-menu-shopcolumn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-shopcolumn p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .shop-img-nav {
+            width: 60%;
+        }
+
+        .sub-menu-shoprow2 {
+            display: flex;
+            flex-direction: row;
+            margin-top: -10px;
+        }
+
+        .sub-menu-shoprow2 a {
+            text-decoration: underline !important;
+            font-size: 14px !important;
+        }
+
+        .sub-menu-shopcolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sub-menu-shopcolumn2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 2;
+            padding-left: 20px;
+        }
+
+        .shopcolumn-links2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px !important;
+            text-decoration: none;
+            color: black !important;
+        }
+
+        .shopcolumn-links2:hover {
+            border-bottom: 2px solid black !important;
+            transition: 0.3s;
+        }
+
+        @media screen and (max-width: 800px) {
+
+            .vehicle-sub-menu {
+                display: none !important;
+            }
+
+            .energy-sub-menu {
+                display: none !important;
+            }
+
+            .charging-sub-menu {
+                display: none !important;
+            }
+
+            .discover-sub-menu {
+                display: none !important;
+            }
+
+            .shop-sub-menu {
+                display: none !important;
+            }
+
+
+            .support-mobile-view-link {
+                display: block;
+            }
+
+            .account-mobile-view-link {
+                display: block;
+            }
+
+        }
+
+        .nav-section-2 {
+            background-color: white;
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-section-2-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .nav-section-2-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 25px;
+            padding-top: 20px;
+            padding-left: 30px;
+            padding-bottom: 20px;
+        }
+
+        .nav-section-2-flex-item1 {
+            align-self: center;
+            padding-right: 30px;
+        }
+
+        .nav-section-2-flex-item1 select {
+            padding: 7px 40px 7px 10px;
+            border-radius: 3px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            margin-right: 20px;
+            background-color: #F4F4F4;
+            border: none;
+            outline: none;
+        }
+
+        .nav-section-2-flex-item1 .grid-icon1 {
+            font-size: 23px;
+            padding-right: 15px;
+            color: grey;
+        }
+
+        .nav-section-2-flex-item1 .grid-icon2 {
+            font-size: 23px;
+            padding-left: 10px;
+            color: grey;
+        }
+
+        .nav-section-2-flex-item1 .grid-icon1:hover,
+        .nav-section-2-flex-item1 .grid-icon2:hover {
+            color: black;
+            transition: 0.3s;
+        }
+
+
+        .nav-section2-mobile-column {
+            display: none;
+        }
+
+
+
+        @media screen and (max-width: 800px) {
+
+            .nav-section-2-row {
+                display: none;
+            }
+
+            .nav-section-2-heading {
+                font-family: 'Poppins', sans-serif;
+                font-size: 25px;
+                padding-top: 20px;
+                padding-left: 30px;
+                padding-bottom: 20px;
+                margin-bottom: 0px;
+            }
+
+
+
+            .nav-section2-mobile-column {
+                display: flex;
+                flex-direction: column;
+                padding-top: 35px;
+            }
+
+            .nav-section2-mobile-row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-right: 30px;
+            }
+
+            .nav-section2-mobile-row div {
+                padding-top: 35px;
+                align-self: center;
+            }
+
+            .nav-section2-mobile-row .grid-icon1 {
+                align-self: center;
+                padding-right: 15px;
+            }
+
+            .nav-section2-mobile-row .grid-icon2 {
+                align-self: center;
+                padding-left: 10px;
+            }
+
+            .nav-section2-mobile-row2 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding-bottom: 20px;
+            }
+
+            .nav-section2-mobile-row2 button {
+                /* padding: 7px 40px 7px 10px; */
+                width: 40%;
+                border-radius: 3px;
+                font-family: 'Poppins', sans-serif;
+                font-size: 16px;
+                margin-right: 20px;
+                background-color: #F4F4F4;
+                border: none;
+                text-align: center;
+            }
+
+            .nav-section2-mobile-row2 select {
+                width: 40%;
+                padding: 7px 0px 7px 10px;
+                border-radius: 3px;
+                font-family: 'Poppins', sans-serif;
+                font-size: 14px;
+                margin-right: 0px;
+                background-color: #F4F4F4;
+                border: none;
+                outline: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <ul id="mobile-nav-navigation" class="nav-links">
+
+            <li id="vehicle-mobile-view-link">
+                <a href="#">Vehicles <i style="display: none;"></i>
+                </a>
+
+                <ul class="vehicle-sub-menu sub-menu animate__animated animate__fadeInDown">
+                    <div class="sub-menu-vehiclesrow-mainrow">
+                        <div class="container">
+                            <div class="row">
+                                <!-- <div class="col-2"></div> -->
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <h6>Visitor services</h6>
+                                        <p>Communication and complaints</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <p>car-1</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <p>car-1</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <p>car-1</p>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-2"></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+
+            <li id="vehicle-mobile-view-link">
+                <a href="#">Vehicles <i style="display: none;"></i>
+                </a>
+
+                <ul class="vehicle-sub-menu sub-menu animate__animated animate__fadeInDown">
+                    <div class="sub-menu-vehiclesrow-mainrow">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <h6>Visitor services</h6>
+                                        <p>Communication and complaints</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <p>car-1</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <p>car-1</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-end">
+                                        <p>car-1</p>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-2"></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+
+
+      
+            <!-- mobile view navbar -->
+
+            <div style="display: none;" id="mobile-vehicle" class="vehicle-mobile-column">
+
+
+                <i id="mobile-vehicleBack-icon" class="fas fa-chevron-left vehicle-mobile-icon"></i>
+
+                <p class="vehicle-mobile-heading">Vehicles</p>
+
+
+                <div class="vehicle-mobile-row">
+                    <img class="mobile-vehicle-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="vehicle-mobile-column2">
+                        <p>Car 1</p>
+                        <div class="vehicle-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="vehicle-mobile-row">
+                    <img class="mobile-vehicle-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="vehicle-mobile-column2">
+                        <p>Car 2</p>
+                        <div class="vehicle-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="vehicle-mobile-row">
+                    <img class="mobile-vehicle-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="vehicle-mobile-column2">
+                        <p>Car 3</p>
+                        <div class="vehicle-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="vehicle-mobile-row">
+                    <img class="mobile-vehicle-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="vehicle-mobile-column2">
+                        <p>Car 4</p>
+                        <div class="vehicle-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mobile-vehicle-border"></div>
+
+
+                <li class="vehicle-mobile-links"><a href="#">Support</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Account</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Support</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Account</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Support</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Account</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Support</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Account</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Support</a></li>
+                <li class="vehicle-mobile-links"><a href="#">Account</a></li>
+
+
+            </div>
+
+
+            <div style="display: none;" id="mobile-energy" class="energy-mobile-column">
+
+
+                <i id="mobile-energyBack-icon" class="fas fa-chevron-left energy-mobile-icon"></i>
+
+                <p class="energy-mobile-heading">Energy</p>
+
+
+                <div class="energy-mobile-row">
+                    <img class="mobile-energy-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="energy-mobile-column2">
+                        <p>Solar 1</p>
+                        <div class="energy-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="energy-mobile-row">
+                    <img class="mobile-energy-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="energy-mobile-column2">
+                        <p>Solar 2</p>
+                        <div class="energy-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="energy-mobile-row">
+                    <img class="mobile-energy-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="energy-mobile-column2">
+                        <p>Solar 3</p>
+                        <div class="energy-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="energy-mobile-row">
+                    <img class="mobile-energy-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="energy-mobile-column2">
+                        <p>Solar 4</p>
+                        <div class="energy-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mobile-energy-border"></div>
+
+
+                <li class="energy-mobile-links"><a href="#">Support</a></li>
+                <li class="energy-mobile-links"><a href="#">Account</a></li>
+                <li class="energy-mobile-links"><a href="#">Support</a></li>
+
+
+            </div>
+
+
+            <div style="display: none;" id="mobile-charging" class="charging-mobile-column">
+
+
+                <i id="mobile-chargingBack-icon" class="fas fa-chevron-left charging-mobile-icon"></i>
+
+                <p class="charging-mobile-heading">Charging</p>
+
+
+                <div class="charging-mobile-row">
+                    <img class="mobile-charging-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="charging-mobile-column2">
+                        <p>charging 1</p>
+                        <div class="charging-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="charging-mobile-row">
+                    <img class="mobile-charging-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="charging-mobile-column2">
+                        <p>charging 2</p>
+                        <div class="charging-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="charging-mobile-row">
+                    <img class="mobile-charging-img-nav" src="./assets/images/car2-crop.jpg" alt="">
+
+                    <div class="charging-mobile-column2">
+                        <p>charging 3</p>
+                        <div class="charging-mobile-row2">
+                            <a href="">Link1</a>
+                            <a href="">Link2</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="mobile-charging-border"></div>
+
+
+                <li class="charging-mobile-links"><a href="#">Support</a></li>
+                <li class="charging-mobile-links"><a href="#">Account</a></li>
+                <li class="charging-mobile-links"><a href="#">Support</a></li>
+                <li class="charging-mobile-links"><a href="#">Support</a></li>
+                <li class="charging-mobile-links"><a href="#">Account</a></li>
+                <li class="charging-mobile-links"><a href="#">Support</a></li>
+            </div>
+
+            <div style="display: none;" id="mobile-discover" class="discover-mobile-column">
+
+                <i id="mobile-discoverBack-icon" class="fas fa-chevron-left discover-mobile-icon"></i>
+
+                <p class="discover-mobile-heading">discover</p>
+
+                <li class="discover-mobile-links"><a href="#">Link 1</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 2</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 3</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 4</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 5</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 6</a></li>
+
+                <li class="discover-mobile-links"><a href="#">Link 7</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 8</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 9</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 10</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 11</a></li>
+                <li class="discover-mobile-links"><a href="#">Link 12</a></li>
+
+            </div>
+
+        </ul>
+
+ 
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+
+    <script>
+
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+const links = document.querySelectorAll(".nav-links li");
+
+hamburger.addEventListener('click', () => {
+    //Animate Links
+    navLinks.classList.toggle("open");
+    links.forEach(link => {
+        link.classList.toggle("fade");
+    });
+
+    //Hamburger Animation
+    hamburger.classList.toggle("toggle");
+});
+
+
+
+
+
+
+
+// let vehicleSubMenu = document.getElementsByClassName("vehicle-sub-menu")
+// vehicleSubMenu.style.display = 
+
+
+let mobileNavView = document.querySelector("#mobile-nav-navigation")
+
+let mobileVehicle = document.querySelector("#mobile-vehicle")
+let mobileenergy = document.querySelector("#mobile-energy")
+let mobileCharging = document.querySelector("#mobile-charging")
+let mobileDiscover = document.querySelector("#mobile-discover")
+
+
+let vehicleMobileViewLink = document.querySelector("#vehicle-mobile-view-link")
+
+
+let energyMobileViewLink = document.querySelector("#energy-mobile-view-link")
+let chargingMobileViewLink = document.querySelector("#charging-mobile-view-link")
+let discoverMobileViewLink = document.querySelector("#discover-mobile-view-link")
+let shopMobileViewLink = document.querySelector("#shop-mobile-view-link")
+let supportMobileViewLink = document.querySelector("#support-mobile-view-link")
+let accountMobileViewLink = document.querySelector("#account-mobile-view-link")
+
+
+
+let vehicleBackIcon = document.querySelector("#mobile-vehicleBack-icon")
+let energyBackIcon = document.querySelector("#mobile-energyBack-icon")
+let chargingBackIcon = document.querySelector("#mobile-chargingBack-icon")
+let discoverBackIcon = document.querySelector("#mobile-discoverBack-icon")
+
+
+vehicleMobileViewLink.addEventListener('click', () => {
+
+    mobileNavView.style.paddingTop = "15px";
+    mobileNavView.style.paddingLeft = "20px";
+    mobileNavView.style.overflow = "scroll";
+
+    vehicleMobileViewLink.style.display = "none"
+
+    energyMobileViewLink.style.display = "none"
+    chargingMobileViewLink.style.display = "none"
+    discoverMobileViewLink.style.display = "none"
+    shopMobileViewLink.style.display = "none"
+    supportMobileViewLink.style.display = "none"
+    accountMobileViewLink.style.display = "none"
+
+    mobileVehicle.style.display = "block"
+})
+
+
+
+energyMobileViewLink.addEventListener('click', () => {
+
+    mobileNavView.style.paddingTop = "15px";
+    mobileNavView.style.paddingLeft = "20px";
+    mobileNavView.style.overflow = "scroll";
+
+    vehicleMobileViewLink.style.display = "none"
+    energyMobileViewLink.style.display = "none"
+    chargingMobileViewLink.style.display = "none"
+    discoverMobileViewLink.style.display = "none"
+    shopMobileViewLink.style.display = "none"
+    supportMobileViewLink.style.display = "none"
+    accountMobileViewLink.style.display = "none"
+
+    mobileVehicle.style.display = "none"
+    mobileCharging.style.display = "none"
+    mobileenergy.style.display = "block"
+})
+
+
+chargingMobileViewLink.addEventListener('click', () => {
+
+    mobileNavView.style.paddingTop = "15px";
+    mobileNavView.style.paddingLeft = "20px";
+    mobileNavView.style.overflow = "scroll";
+
+    vehicleMobileViewLink.style.display = "none"
+    energyMobileViewLink.style.display = "none"
+    chargingMobileViewLink.style.display = "none"
+    discoverMobileViewLink.style.display = "none"
+    shopMobileViewLink.style.display = "none"
+    supportMobileViewLink.style.display = "none"
+    accountMobileViewLink.style.display = "none"
+
+    mobileVehicle.style.display = "none"
+    mobileenergy.style.display = "none"
+    mobileCharging.style.display = "block"
+})
+
+
+discoverMobileViewLink.addEventListener('click', () => {
+
+    mobileNavView.style.paddingTop = "15px";
+    mobileNavView.style.paddingLeft = "20px";
+    mobileNavView.style.overflow = "scroll";
+
+    vehicleMobileViewLink.style.display = "none"
+    energyMobileViewLink.style.display = "none"
+    chargingMobileViewLink.style.display = "none"
+    discoverMobileViewLink.style.display = "none"
+    shopMobileViewLink.style.display = "none"
+    supportMobileViewLink.style.display = "none"
+    accountMobileViewLink.style.display = "none"
+
+    mobileVehicle.style.display = "none"
+    mobileenergy.style.display = "none"
+    mobileCharging.style.display = "none"
+    mobileDiscover.style.display = "block"
+})
+
+
+
+
+vehicleBackIcon.addEventListener("click", () => {
+
+    mobileVehicle.style.display = "none"
+
+    mobileNavView.style.paddingTop = "55px";
+    mobileNavView.style.paddingLeft = "25px";
+    mobileNavView.style.overflow = "hidden";
+
+    vehicleMobileViewLink.style.display = "block"
+
+    energyMobileViewLink.style.display = "block"
+    chargingMobileViewLink.style.display = "block"
+    discoverMobileViewLink.style.display = "block"
+    shopMobileViewLink.style.display = "block"
+    supportMobileViewLink.style.display = "block"
+    accountMobileViewLink.style.display = "block"
+})
+
+energyBackIcon.addEventListener("click", () => {
+
+    mobileVehicle.style.display = "none"
+    mobileenergy.style.display = "none"
+
+    mobileNavView.style.paddingTop = "55px";
+    mobileNavView.style.paddingLeft = "25px";
+    mobileNavView.style.overflow = "hidden";
+
+    vehicleMobileViewLink.style.display = "block"
+
+    energyMobileViewLink.style.display = "block"
+    chargingMobileViewLink.style.display = "block"
+    discoverMobileViewLink.style.display = "block"
+    shopMobileViewLink.style.display = "block"
+    supportMobileViewLink.style.display = "block"
+    accountMobileViewLink.style.display = "block"
+
+    console.log("test");
+})
+
+
+chargingBackIcon.addEventListener("click", () => {
+
+    mobileVehicle.style.display = "none"
+    mobileenergy.style.display = "none"
+    mobileCharging.style.display = "none"
+
+    mobileNavView.style.paddingTop = "55px";
+    mobileNavView.style.paddingLeft = "25px";
+    mobileNavView.style.overflow = "hidden";
+
+    vehicleMobileViewLink.style.display = "block"
+
+    energyMobileViewLink.style.display = "block"
+    chargingMobileViewLink.style.display = "block"
+    discoverMobileViewLink.style.display = "block"
+    shopMobileViewLink.style.display = "block"
+    supportMobileViewLink.style.display = "block"
+    accountMobileViewLink.style.display = "block"
+
+    console.log("test");
+})
+
+discoverBackIcon.addEventListener("click", () => {
+
+    mobileVehicle.style.display = "none"
+    mobileenergy.style.display = "none"
+    mobileCharging.style.display = "none"
+    mobileDiscover.style.display = "none"
+
+    mobileNavView.style.paddingTop = "55px";
+    mobileNavView.style.paddingLeft = "25px";
+    mobileNavView.style.overflow = "hidden";
+
+    vehicleMobileViewLink.style.display = "block"
+
+    energyMobileViewLink.style.display = "block"
+    chargingMobileViewLink.style.display = "block"
+    discoverMobileViewLink.style.display = "block"
+    shopMobileViewLink.style.display = "block"
+    supportMobileViewLink.style.display = "block"
+    accountMobileViewLink.style.display = "block"
+
+    console.log("test");
+})
+
+</script>
+</body>
+
+</html>
